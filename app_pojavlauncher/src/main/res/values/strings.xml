@@ -21,7 +21,7 @@
     <string name="alerttitle_installmod">Select a mod installer</string>
 
     <!-- Error messages -->
-    <string name="error_fatal">CS LAUNCHER V2 has unexpectedly crashed</string>
+    <string name="error_fatal">Nexus Launcher has unexpectedly crashed</string>
     <string name="error_no_version">No version!</string>
     <string name="error_show_more">Show more</string>
     <string name="error_show_less">Show less</string>
@@ -251,7 +251,7 @@
     <string name="color_default_hex" translatable="false">FFFF0000</string>
     <string name="notif_channel_name">General</string>
     <string name="notif_channel_id" translatable="false">channel_id</string>
-    <string name="lazy_service_default_title">CS Launcher Foreground Service</string>
+    <string name="lazy_service_default_title">Nexus Launcher Foreground Service</string>
     <string name="mcl_setting_veroption_installed">Installed</string>
     <string name="use_global_default">(Use global default)</string>
     <string name="default_control">Default controlmap</string>
@@ -563,7 +563,7 @@
     <string name="mod_deps_install_without">Install without deps</string>
 
     <!-- Launcher Landscape Layout Strings -->
-    <string name="cs_launcher_title">CS LAUNCHER v2</string>
+    <string name="cs_launcher_title">Nexus Launcher V2</string>
     <string name="cs_launcher_subtitle">YOUR MINECRAFT. YOUR WAY.</string>
     <string name="cs_welcome_back_label">· WELCOME BACK,</string>
     <string name="cs_welcome_username">STEVE</string>
