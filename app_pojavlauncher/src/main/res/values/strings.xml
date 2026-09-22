@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name" translatable="false">Nexus Launcher V2</string>
+    <string name="app_name" translatable="false">NEXUS LAUNCHER v3</string>
 
     <!-- Action bar part -->
 
@@ -21,7 +21,7 @@
     <string name="alerttitle_installmod">Select a mod installer</string>
 
     <!-- Error messages -->
-    <string name="error_fatal">Nexus Launcher has unexpectedly crashed</string>
+    <string name="error_fatal">NEXUS LAUNCHER v3 has unexpectedly crashed</string>
     <string name="error_no_version">No version!</string>
     <string name="error_show_more">Show more</string>
     <string name="error_show_less">Show less</string>
@@ -88,7 +88,7 @@
     <string name="global_restart">Restart</string>
     <string name="global_save">Save</string>
     <string name="global_unpacking">Unpacking %s</string>
-    <string name="global_error_field_empty">This field can\'t be empty</string>
+    <string name="global_error_field_empty">This field can't be empty</string>
     <string name="global_waiting">Wait</string>
     <string name="global_select">Select</string>
     <string name="global_retry">Retry</string>
@@ -168,9 +168,9 @@
     <string name="main_play">Play</string>
     <string name="autoram_info_msg">Memory set to %d MB</string>
     <string name="mcl_setting_check_libraries">Check libraries after downloading</string>
-    <string name="mcl_setting_check_libraries_subtitle">This option forces the launcher to check the library hash if it\'s available. Prevents broken downloads.</string>
+    <string name="mcl_setting_check_libraries_subtitle">This option forces the launcher to check the library hash if it's available. Prevents broken downloads.</string>
     <string name="dl_library_sha_fail">Library %s is damaged and will be redownloaded</string>
-    <string name="dl_library_sha_unknown">Library %s can\'t be checked, have to assume it\'s good</string>
+    <string name="dl_library_sha_unknown">Library %s can't be checked, have to assume it's good</string>
     <string name="dl_library_sha_pass">Library %s is fine and usable</string>
     <string name="mcl_gamepad_SDL">Enable SDL controller backend</string>
     <string name="mcl_gamepad_SDL_subtitle">Enables SDL controller backend. Has better mod support. Falls back to GLFW if not used.</string>
@@ -200,8 +200,8 @@
     <string name="multirt_config_setdefault">Set default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">You must have at least one Java Runtime installed.</string>
-    <string name="multirt_nocompatiblert">Can\'t find any compatible Java Runtime. This version requires Java %d or newer.</string>
-    <string name="multirt_nojava8rt">Can\'t find Java 8. In order to use this option, you need to install Java 8.</string>
+    <string name="multirt_nocompatiblert">Can't find any compatible Java Runtime. This version requires Java %d or newer.</string>
+    <string name="multirt_nojava8rt">Can't find Java 8. In order to use this option, you need to install Java 8.</string>
     <string name="multirt_delete_runtime">Delete runtime</string>
     <string name="pvc_gameDirectory">Game directory</string>
     <string name="pvc_jvmArgs">JVM arguments</string>
@@ -251,7 +251,7 @@
     <string name="color_default_hex" translatable="false">FFFF0000</string>
     <string name="notif_channel_name">General</string>
     <string name="notif_channel_id" translatable="false">channel_id</string>
-    <string name="lazy_service_default_title">Nexus Launcher Foreground Service</string>
+    <string name="lazy_service_default_title">NEXUS LAUNCHER v3 Foreground Service</string>
     <string name="mcl_setting_veroption_installed">Installed</string>
     <string name="use_global_default">(Use global default)</string>
     <string name="default_control">Default controlmap</string>
@@ -268,7 +268,7 @@
     <string name="no_saved_accounts">No saved accounts</string>
     <string name="mc_download_failed">Failed to download Minecraft! This could be due to bad network connection, incorrectly placed files, trying to download Minecraft from a Local account, etc..</string>
     <string name="xerr_unknown">Unknown Xbox Live API error %d</string>
-    <string name="xerr_no_account">You don\'t seem to have an Xbox Live account. Please log in once on https://minecraft.net/ and try again.</string>
+    <string name="xerr_no_account">You don't seem to have an Xbox Live account. Please log in once on https://minecraft.net/ and try again.</string>
     <string name="xerr_adult_verification">An adult needs to verify your account.</string>
     <string name="xerr_child">Your account is a child account, and needs to be added into a Family in order to log in.</string>
     <string name="minecraft_not_owned">It seems like this account does not have a Minecraft profile. If you have Xbox Game Pass, please log in on https://minecraft.net/ and set it up.</string>
@@ -379,8 +379,8 @@
     <string name="dl_tampered_manifest_title">File verification warning</string>
     <string name="dl_tampered_manifest"><![CDATA[The game version manifest on the mirror does not match the official Mojang version manifest, which means it may have been tampered with.<br/>
         <b>This is not safe. Your personal information may be at risk if you continue.</b><br/>
-        If you still want to use the mirror, press \"Turn off manifest checks\" and start the download again.<br/>
-        If you want to use the official download source, press \"Switch to official site\" and start the download again.<br/>]]>
+        If you still want to use the mirror, press "Turn off manifest checks" and start the download again.<br/>
+        If you want to use the official download source, press "Switch to official site" and start the download again.<br/>]]>
     </string>
     <string name="dl_turn_off_manifest_checks">Turn off manifest checks</string>
     <string name="dl_switch_to_official_site">Switch to official site</string>
@@ -398,12 +398,12 @@
     <string name="preference_category_miscellaneous">Miscellaneous settings</string>
     <string name="preference_category_video">Video settings</string>
     <string name="notification_permission_dialog_title">Permission request</string>
-    <string name="notification_permission_dialog_text">PojavLauncher requires a permission to post notifications to prevent game/modpack downloads from stopping when you leave the app. Without this permission, Android may shut down your downloads when you put PojavLauncher in background mode.</string>
+    <string name="notification_permission_dialog_text">PojavLauncher requires a permission to post notifications to prevent game/modpack downloads from stopping when you leave the app. Without this permission, background downloads may stop.</string>
     <string name="notification_permission_toast">You can always change your mind later by going into Settings</string>
     <string name="preference_ask_for_notification_title">Allow notifications</string>
     <string name="preference_ask_for_notification_description">Click to re-request the notification permission, required for game/modpack background downloads to work properly.</string>
     <string name="preference_vsync_in_zink_title">Allow V-Sync with Zink</string>
-    <string name="preference_vsync_in_zink_description">Allows the launcher to use internal system APIs to enable V-Sync for Zink. Turn this off if your launcher suddenly crashes with Zink after a system update.</string>
+    <string name="preference_vsync_in_zink_description">Allows the launcher to use internal system APIs to enable V-Sync for Zink. Turn this off if your launcher suddenly crashes with Zink after updates.</string>
     <string name="exception_failed_to_unpack_jre17">Failed to install JRE 17</string>
     <string name="newdl_starting">Reading game metadata…</string>
     <string name="newdl_downloading_jre_runtime">Downloading Java %s runtime (%.2f/%.2f MB)</string>
@@ -479,14 +479,14 @@
     <string name="mcl_button_shader_packs">Shader Packs</string>
     <string name="mcl_button_install_modpack">Install Modpack (.mrpack/zip)</string>
     <string name="delete">Delete</string>
-    <string name="ltw_render_distance_warning_msg">Your GPU is not capable of rendering above 7 render distance without Sodium or other similar mods. The render distance will be automatically reduced when you click "OK".</string>
+    <string name="ltw_render_distance_warning_msg">Your GPU is not capable of rendering above 7 render distance without Sodium or other similar mods. The render distance will be automatically reduced.</string>
     <string name="mcl_button_open_directory">Open game directory</string>
     <string name="discord_invite" translatable="false">https://discord.gg/8WzF2RVAq4</string>
     <string name="local_login_bad_username_title">Unsuitable username</string>
     <string name="local_login_bad_username_text">The username must be between 3–16 characters long, and must only contain latin letters, numbers 0–9 and underscores.</string>
     <string name="quick_setting_title">Quick settings</string>
-    <string name="create_bta_profile">Create \"Better than Adventure!\" profile</string>
-    <string name="select_bta_version">Select \"Better than Adventure!\" version</string>
+    <string name="create_bta_profile">Create "Better than Adventure!" profile</string>
+    <string name="select_bta_version">Select "Better than Adventure!" version</string>
     <string name="bta_installer_available_versions">Supported BTA versions</string>
     <string name="bta_installer_untested_versions">Untested BTA versions</string>
     <string name="bta_installer_nightly_versions">Nightly BTA versions</string>
@@ -510,7 +510,7 @@
     <string name="mg_renderer_summary_computeShaderext">May help with shaderpack glitches. Disable if not needed, can cause crashes.</string>
     <string name="mg_renderer_title_multidrawCompute">Use Compute Multidraw Emulation</string>
     <string name="mg_renderer_summary_multidrawCompute">Uses compute shaders for multidraw emulation</string>
-    <string name="app_short_name" translatable="false">CS LAUNCHER v2</string>
+    <string name="app_short_name" translatable="false">Nexus Launcher v2</string>
     <string name="demo_versions_supported">Only Vanilla 1.3.1 and above are supported on demo accounts</string>
     <string name="demo_unsupported">Demo Profile not supported</string>
     <string name="change_account">Please change accounts to use this function</string>
@@ -550,7 +550,7 @@
     <!--  Make sure the people turning this on can read English.  -->
     <string name="sodium_math_warning_title" translatable="false">Solve the math question to enable</string>
     <string name="sodium_math_warning_message" translatable="false">
-    Sodium is unsupported, you are on your own. No support will be given in the discord server.\nUsing sodium may result in bugs, glitches, and crashes. No help will be given even if you lose any of your worlds or saves.\n\nNow what\'s %1$s multiplied by %2$s plus %3$s minus %4$s?
+    Sodium is unsupported, you are on your own. No support will be given in the discord server.\nUsing sodium may result in bugs, glitches, and crashes. No help will be given even if you lose any progress.
     </string>
     <string name="not_modpack_file">Not a modpack file!</string>
     <string name="global_not_installed">Not Installed</string>
@@ -563,7 +563,7 @@
     <string name="mod_deps_install_without">Install without deps</string>
 
     <!-- Launcher Landscape Layout Strings -->
-    <string name="cs_launcher_title">Nexus Launcher V2</string>
+    <string name="cs_launcher_title">NEXUS LAUNCHER v3</string>
     <string name="cs_launcher_subtitle">YOUR MINECRAFT. YOUR WAY.</string>
     <string name="cs_welcome_back_label">· WELCOME BACK,</string>
     <string name="cs_welcome_username">STEVE</string>
@@ -605,7 +605,7 @@
     <string name="mp_generate">Generate</string>
     <string name="mp_generating">Generating...</string>
     <string name="mp_already_generated">This modpack has already been generated</string>
-    <string name="mp_generated_success">Modpack \"%s\" created successfully!</string>
+    <string name="mp_generated_success">Modpack "%s" created successfully!</string>
     <string name="mp_generate_failed">Generation failed: %s</string>
     <string name="mp_step1_short">Version</string>
     <string name="mp_step2_short">Loader</string>
