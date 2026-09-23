@@ -2,19 +2,23 @@ name: CS Launcher V2 CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
+    name: Build APKs
     runs-on: ubuntu-22.04
-    permissions:
-      contents: read
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           submodules: recursive
@@ -24,16 +28,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-
-      - name: Download JRE 8
-        uses: dawidd6/action-download-artifact@v6
-        with:
-          workflow: build.yml
-          path: app_pojavlauncher/src/main/assets/components/jre
-          workflow_conclusion: success
-          repo: AngelAuraMC/angelauramc-openjdk-build
-          branch: buildjre8
-          name: jre8-pojav
+          cache: gradle
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -41,41 +36,64 @@ jobs:
           validate-wrappers: false
           gradle-version: '8.11'
 
-      - name: Fix Android string escapes
+      - name: Prepare build
         shell: bash
         run: |
-          find app_pojavlauncher/src/main/res -type f -name 'strings.xml' -print0 | while IFS= read -r -d '' file; do
-            sed -i "s/\\\\'/'/g" "$file"
-          done
-
-      - name: Prepare build
-        run: |
           chmod +x ./gradlew
-          chmod +x ./scripts/languagelist_updater.sh
-          ./scripts/languagelist_updater.sh
+
+          if [ -f ./scripts/languagelist_updater.sh ]; then
+            chmod +x ./scripts/languagelist_updater.sh
+            ./scripts/languagelist_updater.sh
+          fi
 
       - name: Build release APK
-        run: ./gradlew :app_pojavlauncher:assembleRelease --no-daemon --stacktrace
+        shell: bash
+        run: |
+          ./gradlew :app_pojavlauncher:assembleRelease \
+            --no-daemon \
+            --stacktrace
 
       - name: Build debug APK
-        run: ./gradlew :app_pojavlauncher:assembleDebug --no-daemon
+        shell: bash
+        run: |
+          ./gradlew :app_pojavlauncher:assembleDebug \
+            --no-daemon
 
       - name: Collect APKs
         shell: bash
         run: |
           set -e
+
           mkdir -p out
-          release_apk=$(find app_pojavlauncher/build/outputs/apk/release -name '*.apk' | head -n 1)
-          debug_apk=$(find app_pojavlauncher/build/outputs/apk/debug -name '*.apk' | head -n 1)
-          test -n "$release_apk"
-          test -n "$debug_apk"
-          cp "$release_apk" out/NEXUS-LAUNCHER-v3-release.apk
-          cp "$debug_apk" out/NEXUS-LAUNCHER-v3-debug.apk
+
+          RELEASE_APK="$(find app_pojavlauncher/build/outputs/apk/release \
+            -type f -name '*.apk' | head -n 1)"
+
+          DEBUG_APK="$(find app_pojavlauncher/build/outputs/apk/debug \
+            -type f -name '*.apk' | head -n 1)"
+
+          if [ -z "$RELEASE_APK" ]; then
+            echo "Release APK not found"
+            exit 1
+          fi
+
+          if [ -z "$DEBUG_APK" ]; then
+            echo "Debug APK not found"
+            exit 1
+          fi
+
+          cp "$RELEASE_APK" out/NEXUS-LAUNCHER-v3-release.apk
+          cp "$DEBUG_APK" out/NEXUS-LAUNCHER-v3-debug.apk
+
           sha256sum out/*.apk > out/checksums.sha256
+
+          echo "Generated APKs:"
+          ls -lh out/
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v4
         with:
           name: nexus-launcher-v3-apks-${{ github.run_number }}
           path: out/
+          if-no-files-found: error
           retention-days: 30
