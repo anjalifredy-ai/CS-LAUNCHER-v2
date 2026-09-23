@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build:
-    name: Build APKs
+    name: Build Android APKs
     runs-on: ubuntu-22.04
 
     steps:
@@ -36,15 +36,46 @@ jobs:
           validate-wrappers: false
           gradle-version: '8.11'
 
-      - name: Prepare build
+      - name: Repair Android string resources
         shell: bash
         run: |
-          chmod +x ./gradlew
+          python3 <<'PY'
+          from pathlib import Path
+          import re
 
+          resource_root = Path("app_pojavlauncher/src/main/res")
+
+          for path in resource_root.rglob("strings.xml"):
+              text = path.read_text(encoding="utf-8")
+
+              # Remove malformed Unicode escapes such as \u{str}
+              # while preserving valid escapes such as \u1234.
+              text = re.sub(
+                  r"\\u(?![0-9a-fA-F]{4})",
+                  "",
+                  text
+              )
+
+              # Apostrophes do not need a backslash in Android XML strings.
+              text = text.replace("\\'", "'")
+
+              path.write_text(text, encoding="utf-8")
+              print(f"Repaired: {path}")
+          PY
+
+      - name: Update language list
+        shell: bash
+        run: |
           if [ -f ./scripts/languagelist_updater.sh ]; then
             chmod +x ./scripts/languagelist_updater.sh
             ./scripts/languagelist_updater.sh
           fi
+
+      - name: Make Gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Clean previous build
+        run: ./gradlew clean --no-daemon
 
       - name: Build release APK
         shell: bash
@@ -57,38 +88,64 @@ jobs:
         shell: bash
         run: |
           ./gradlew :app_pojavlauncher:assembleDebug \
-            --no-daemon
+            --no-daemon \
+            --stacktrace
 
-      - name: Collect APKs
+      - name: Collect APK files
         shell: bash
         run: |
           set -e
 
           mkdir -p out
 
-          RELEASE_APK="$(find app_pojavlauncher/build/outputs/apk/release \
-            -type f -name '*.apk' | head -n 1)"
+          RELEASE_APK="$(find \
+            app_pojavlauncher/build/outputs/apk/release \
+            -type f \
+            -name '*.apk' \
+            | head -n 1)"
 
-          DEBUG_APK="$(find app_pojavlauncher/build/outputs/apk/debug \
-            -type f -name '*.apk' | head -n 1)"
+          DEBUG_APK="$(find \
+            app_pojavlauncher/build/outputs/apk/debug \
+            -type f \
+            -name '*.apk' \
+            | head -n 1)"
 
           if [ -z "$RELEASE_APK" ]; then
-            echo "Release APK not found"
+            echo "ERROR: Release APK was not found"
             exit 1
           fi
 
           if [ -z "$DEBUG_APK" ]; then
-            echo "Debug APK not found"
+            echo "ERROR: Debug APK was not found"
             exit 1
           fi
 
-          cp "$RELEASE_APK" out/NEXUS-LAUNCHER-v3-release.apk
-          cp "$DEBUG_APK" out/NEXUS-LAUNCHER-v3-debug.apk
+          cp "$RELEASE_APK" \
+            out/NEXUS-LAUNCHER-v3-release.apk
 
+          cp "$DEBUG_APK" \
+            out/NEXUS-LAUNCHER-v3-debug.apk
+
+          md5sum out/*.apk > out/checksums.md5
           sha256sum out/*.apk > out/checksums.sha256
 
-          echo "Generated APKs:"
+          echo "Generated files:"
           ls -lh out/
+
+      - name: Create APK size report
+        shell: bash
+        run: |
+          {
+            echo "## APK Build Report"
+            echo
+            echo "| File | Size |"
+            echo "|---|---:|"
+
+            for file in out/*.apk; do
+              size=$(du -h "$file" | cut -f1)
+              echo "| $(basename "$file") | $size |"
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload APK artifacts
         uses: actions/upload-artifact@v4
